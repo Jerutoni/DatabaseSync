@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.iisSoft</groupId>
-    <artifactId>DepartmentUpload</artifactId>
+    <artifactId>UsersUpload</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>DepartmentUpload</name>
+    <name>UsersUpload</name>
 
 
     <properties>
@@ -52,7 +52,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.isf.departmentupload.DepartmentUpload</mainClass>
+                            <mainClass>com.isf.usersupload.UsersUpload</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -82,7 +82,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.isf.departmentupload.DepartmentUpload</mainClass>
+                            <mainClass>com.isf.usersupload.UsersUpload</mainClass>
                         </manifest>
                     </archive>
                     <descriptors>

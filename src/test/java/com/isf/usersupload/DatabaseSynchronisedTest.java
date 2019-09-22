@@ -1,10 +1,10 @@
-package com.isf.departmentupload;
+package com.isf.usersupload;
 
-import com.isf.departmentupload.parser.XmlCreator;
-import com.isf.departmentupload.parser.XmlParser;
-import com.isf.departmentupload.persistence.model.Department;
-import com.isf.departmentupload.service.DatabaseSynchronize;
-import com.isf.departmentupload.service.DepartmentService;
+import com.isf.usersupload.parser.XmlCreator;
+import com.isf.usersupload.parser.XmlParser;
+import com.isf.usersupload.persistence.model.User;
+import com.isf.usersupload.service.DatabaseSynchronize;
+import com.isf.usersupload.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DatabaseSynchronisedTest {
 
-    private DepartmentService departmentService = new DepartmentService();
+    private UserService userService = new UserService();
     private XmlParser xmlParser = new XmlParser();
     private DatabaseSynchronize databaseSynchronize = new DatabaseSynchronize();
     private final String fileName = "XmlForTest";
@@ -28,10 +28,10 @@ public class DatabaseSynchronisedTest {
 
     @Test
     public void synchronisedDatabaseTest() throws SQLException {
-        List<Department> xmlDepartment = xmlParser.parse(fileName);
+        List<User> xmlUser = xmlParser.parse(fileName);
         databaseSynchronize.synchronize(fileName);
-        List<Department> databaseAfterSynchronised = departmentService.getDepartments();
-        Assert.assertEquals(xmlDepartment, databaseAfterSynchronised);
+        List<User> databaseAfterSynchronised = userService.getUsers();
+        Assert.assertEquals(xmlUser, databaseAfterSynchronised);
 
     }
 }

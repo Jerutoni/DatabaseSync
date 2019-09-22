@@ -1,6 +1,6 @@
-package com.isf.departmentupload;
+package com.isf.usersupload;
 
-import com.isf.departmentupload.utill.Connector;
+import com.isf.usersupload.utill.Connector;
 import org.junit.Assert;
 import org.junit.Test;
 

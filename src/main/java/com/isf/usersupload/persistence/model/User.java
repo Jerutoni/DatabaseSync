@@ -1,8 +1,8 @@
-package com.isf.departmentupload.persistence.model;
+package com.isf.usersupload.persistence.model;
 
 import java.util.Objects;
 
-public class Department {
+public class User {
     private int id;
     private String depCode;
     private String depJob;
@@ -40,27 +40,27 @@ public class Department {
         this.description = description;
     }
 
-    public Department(int id, String depCode, String depJob, String description) {
+    public User(int id, String depCode, String depJob, String description) {
         this.id = id;
         this.depCode = depCode;
         this.depJob = depJob;
         this.description = description;
     }
 
-    public Department(String depCode, String depJob, String description) {
+    public User(String depCode, String depJob, String description) {
         this.depCode = depCode;
         this.depJob = depJob;
         this.description = description;
     }
 
-    public Department() {
+    public User() {
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Department that = (Department) o;
+        User that = (User) o;
         return depCode.equals(that.depCode) &&
                 depJob.equals(that.depJob) &&
                 description.equals(that.description);
@@ -73,7 +73,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "User{" +
                 "id=" + id +
                 ", depCode='" + depCode + '\'' +
                 ", depJob='" + depJob + '\'' +

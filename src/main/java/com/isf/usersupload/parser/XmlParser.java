@@ -1,8 +1,8 @@
-package com.isf.departmentupload.parser;
+package com.isf.usersupload.parser;
 
-import com.isf.departmentupload.exception.SameDepartmentsFoundException;
-import com.isf.departmentupload.persistence.model.Department;
-import com.isf.departmentupload.utill.DepartmentKey;
+import com.isf.usersupload.exception.SameUsersFoundException;
+import com.isf.usersupload.persistence.model.User;
+import com.isf.usersupload.utill.UserKey;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class with one public method for parse xml file to Department list
+ * Class with one public method for parse xml file to User list
  */
 public class XmlParser {
 
@@ -29,41 +29,41 @@ public class XmlParser {
 
     private final String XML_PATH = "C:\\XML\\";
 
-    public List<Department> parse(String fileName) throws SameDepartmentsFoundException {
+    public List<User> parse(String fileName) throws SameUsersFoundException {
         File xmlFile = new File(XML_PATH + fileName + ".xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
-        List<Department> dep = null;
+        List<User> users = null;
         try {
             builder = factory.newDocumentBuilder();
             Document document = builder.parse(xmlFile);
             document.getDocumentElement().normalize();
-            NodeList nodeList = document.getElementsByTagName("department");
-            dep = new ArrayList<>();
+            NodeList nodeList = document.getElementsByTagName("user");
+            users = new ArrayList<>();
             for (int i = 0; i < nodeList.getLength(); i++) {
-                dep.add(getDepartment(nodeList.item(i)));
+                users.add(getUser(nodeList.item(i)));
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             logger.error("Xml parse error: " + e);
         }
 
-        checkForDuplicate(Objects.requireNonNull(dep));
+        checkForDuplicate(Objects.requireNonNull(users));
         logger.info("Xml parse successful - " + fileName + ".xml");
-        return dep;
+        return users;
 
     }
 
 
-    private Department getDepartment(Node node) {
-        Department department = new Department();
+    private User getUser(Node node) {
+        User user = new User();
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element element = (Element) node;
-            department.setDepCode(getTagValue("dep_code", element));
-            department.setDepJob(getTagValue("dep_job", element));
-            department.setDescription(getTagValue("description", element));
+            user.setDepCode(getTagValue("dep_code", element));
+            user.setDepJob(getTagValue("dep_job", element));
+            user.setDescription(getTagValue("description", element));
         }
 
-        return department;
+        return user;
     }
 
     private String getTagValue(String tag, Element element) {
@@ -73,15 +73,15 @@ public class XmlParser {
     }
 
     /**
-     * @param departments - List of department to check for On identical entities
-     * @throws SameDepartmentsFoundException if the departments has repeated entries
+     * @param users - List of Users to check for On identical entities
+     * @throws SameUsersFoundException if the Users list has repeated entries
      */
-    private void checkForDuplicate(List<Department> departments) throws SameDepartmentsFoundException {
-        HashSet<DepartmentKey> departmentKeys = new HashSet<>();
-        for (Department department : departments) {
-            departmentKeys.add(new DepartmentKey(department.getDepCode(), department.getDepJob()));
+    private void checkForDuplicate(List<User> users) throws SameUsersFoundException {
+        HashSet<UserKey> userKeys = new HashSet<>();
+        for (User user : users) {
+            userKeys.add(new UserKey(user.getDepCode(), user.getDepJob()));
         }
-        if (!(departmentKeys.size() == departments.size()))
-            throw new SameDepartmentsFoundException("Same departments found");
+        if (!(userKeys.size() == users.size()))
+            throw new SameUsersFoundException("Same Users found");
     }
 }

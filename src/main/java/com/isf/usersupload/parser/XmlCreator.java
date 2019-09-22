@@ -1,7 +1,7 @@
-package com.isf.departmentupload.parser;
+package com.isf.usersupload.parser;
 
-import com.isf.departmentupload.persistence.model.Department;
-import com.isf.departmentupload.service.DepartmentService;
+import com.isf.usersupload.persistence.model.User;
+import com.isf.usersupload.service.UserService;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,7 +26,7 @@ public class XmlCreator {
     private final static Logger logger = Logger.getLogger(XmlCreator.class);
     private final String xmlFilePath = "C:\\XML\\";
 
-    private DepartmentService databaseService = new DepartmentService();
+    private UserService userService = new UserService();
 
     /**
      * @param fileName - The name of the xml file to be created
@@ -39,27 +39,27 @@ public class XmlCreator {
 
             Document document = documentBuilder.newDocument();
 
-            Element root = document.createElement("departments");
+            Element root = document.createElement("users");
             document.appendChild(root);
 
-            List<Department> departments = databaseService.getDepartments();
+            List<User> users = userService.getUsers();
 
-            for (Department dep : departments) {
+            for (User dep : users) {
 
-                Element department = document.createElement("department");
-                root.appendChild(department);
+                Element user = document.createElement("user");
+                root.appendChild(user);
 
                 Element depCode = document.createElement("dep_code");
                 depCode.appendChild(document.createTextNode(dep.getDepCode()));
-                department.appendChild(depCode);
+                user.appendChild(depCode);
 
                 Element depJob = document.createElement("dep_job");
                 depJob.appendChild(document.createTextNode(dep.getDepJob()));
-                department.appendChild(depJob);
+                user.appendChild(depJob);
 
                 Element depDescription = document.createElement("description");
                 depDescription.appendChild(document.createTextNode(dep.getDescription()));
-                department.appendChild(depDescription);
+                user.appendChild(depDescription);
 
             }
             createFile(document, fileName);

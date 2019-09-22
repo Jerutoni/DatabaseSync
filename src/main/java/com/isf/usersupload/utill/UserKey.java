@@ -1,8 +1,8 @@
-package com.isf.departmentupload.utill;
+package com.isf.usersupload.utill;
 
 import java.util.Objects;
 
-public class DepartmentKey {
+public class UserKey {
 
     private String depCode;
     private String depJob;
@@ -23,19 +23,19 @@ public class DepartmentKey {
         this.depJob = depJob;
     }
 
-    public DepartmentKey(String depCode, String depJob) {
+    public UserKey(String depCode, String depJob) {
         this.depCode = depCode;
         this.depJob = depJob;
     }
 
-    public DepartmentKey() {
+    public UserKey() {
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DepartmentKey that = (DepartmentKey) o;
+        UserKey that = (UserKey) o;
         return depCode.equals(that.depCode) &&
                 depJob.equals(that.depJob);
     }
@@ -47,7 +47,7 @@ public class DepartmentKey {
 
     @Override
     public String toString() {
-        return "DepartmentKey{" +
+        return "UserKey{" +
                 "depCode='" + depCode + '\'' +
                 ", depJob='" + depJob + '\'' +
                 '}';
