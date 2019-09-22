@@ -10,9 +10,11 @@ public class DepartmentUpload {
 
         if (args[0].equalsIgnoreCase("create")) {
             xmlCreator.createXmlFile(args[1]);
-        }
+        } else
         if (args[0].equalsIgnoreCase("sync")) {
             databaseSynchronize.synchronize(args[1]);
+        } else {
+            throw new RuntimeException("Invalid command Name");
         }
     }
 }
