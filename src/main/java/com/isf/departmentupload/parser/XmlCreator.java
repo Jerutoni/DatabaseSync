@@ -19,12 +19,18 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class with one public method for creating a xml file based on data from a database
+ */
 public class XmlCreator {
     private final static Logger logger = Logger.getLogger(XmlCreator.class);
     private final String xmlFilePath = "C:\\XML\\";
 
     private DepartmentService databaseService = new DepartmentService();
 
+    /**
+     * @param fileName - The name of the xml file to be created
+     */
     public void createXmlFile(String fileName) {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

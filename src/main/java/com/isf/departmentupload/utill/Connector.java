@@ -21,7 +21,7 @@ public class Connector {
             properties.load(input);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Properties load error: " + e);
         }
     }
 
@@ -31,9 +31,9 @@ public class Connector {
         } catch (ClassNotFoundException e) {
             log.error("Open connection error: " + e);
         }
-        Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
+        return DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
                 properties.getProperty("password"));
-        return connection;
+
     }
 
 }

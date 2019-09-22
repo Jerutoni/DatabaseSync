@@ -7,6 +7,9 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 
+/**
+ * The class has one public method that synchronizes data with the database.
+ */
 public class DatabaseSynchronize {
 
     private final static Logger log = Logger.getLogger(DatabaseSynchronize.class);
@@ -24,7 +27,7 @@ public class DatabaseSynchronize {
         }
 
         synchronizeDatabase(departmentMap, databaseDepartments);
-        log.info("Database Synchronize successful from - " + fileName + ".xml");
+
     }
 
     private void synchronizeDatabase(Map<DepartmentKey, Department> departmentMap, List<Department> databaseDepartments) {

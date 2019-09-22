@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * The departmentService сlass for manipulating data in a database
+ */
 public class DepartmentService {
     private static final Logger log = Logger.getLogger(DepartmentService.class);
 
@@ -22,6 +26,10 @@ public class DepartmentService {
     private final String UPDATE_DEPARTMENT = "UPDATE departments set description = ? where id = ?;";
     private final String DELETE_DEPARTMENT = "DELETE FROM departments WHERE id = ?;";
 
+
+    /**
+     * @return all Departments from the database
+     */
     public List<Department> getDepartments() {
         String GET_ALL_DEPARTMENTS = "SELECT * FROM Departments";
         List<Department> departments = new ArrayList<>();
@@ -56,6 +64,13 @@ public class DepartmentService {
         return departments;
     }
 
+
+    /**
+     * Method The method synchronizes the database from the xml file within one transaction
+     *
+     * @param departmentsForUpdate - Map in which data is stored either for updating or for adding,depending on id
+     * @param departmentsForDelete - List in which data to be deleted from the database is stored
+     */
     void synchronizeData(Map<DepartmentKey, Department> departmentsForUpdate, List<Department> departmentsForDelete) {
         boolean bSuccess = false;
         Connection connection = null;
@@ -96,6 +111,7 @@ public class DepartmentService {
                 if (connection != null) {
                     if (bSuccess) {
                         connection.commit();
+                        log.info("Database Synchronize successful ");
                     } else {
                         connection.rollback();
                     }

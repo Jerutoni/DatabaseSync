@@ -20,6 +20,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class with one public method for parse xml file to Department list
+ */
 public class XmlParser {
 
     private final static Logger logger = Logger.getLogger(XmlParser.class);
@@ -45,7 +48,7 @@ public class XmlParser {
         }
 
         checkForDuplicate(Objects.requireNonNull(dep));
-        logger.info("Xml parse successful - " + fileName+".xml");
+        logger.info("Xml parse successful - " + fileName + ".xml");
         return dep;
 
     }
@@ -69,6 +72,10 @@ public class XmlParser {
         return node.getNodeValue();
     }
 
+    /**
+     * @param departments - List of department to check for On identical entities
+     * @throws SameDepartmentsFoundException if the departments has repeated entries
+     */
     private void checkForDuplicate(List<Department> departments) throws SameDepartmentsFoundException {
         HashSet<DepartmentKey> departmentKeys = new HashSet<>();
         for (Department department : departments) {
