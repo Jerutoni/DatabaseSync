@@ -16,7 +16,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 public class XmlCreator {
@@ -36,7 +36,7 @@ public class XmlCreator {
             Element root = document.createElement("departments");
             document.appendChild(root);
 
-            HashSet<Department> departments = databaseService.getDepartments();
+            List<Department> departments = databaseService.getDepartments();
 
             for (Department dep : departments) {
 
@@ -57,9 +57,9 @@ public class XmlCreator {
 
             }
             createFile(document, fileName);
-            logger.info("Xml file created");
+            logger.info("Xml file created - " + fileName + ".xml");
 
-        } catch (ParserConfigurationException  | TransformerException e) {
+        } catch (ParserConfigurationException | TransformerException e) {
             logger.error("Create xml file exception: " + e);
         }
 

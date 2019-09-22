@@ -45,7 +45,7 @@ public class XmlParser {
         }
 
         checkForDuplicate(Objects.requireNonNull(dep));
-        logger.info("Xml parse successful");
+        logger.info("Xml parse successful - " + fileName+".xml");
         return dep;
 
     }
@@ -69,12 +69,12 @@ public class XmlParser {
         return node.getNodeValue();
     }
 
-    private boolean checkForDuplicate(List<Department> departments) throws SameDepartmentsFoundException {
+    private void checkForDuplicate(List<Department> departments) throws SameDepartmentsFoundException {
         HashSet<DepartmentKey> departmentKeys = new HashSet<>();
         for (Department department : departments) {
             departmentKeys.add(new DepartmentKey(department.getDepCode(), department.getDepJob()));
         }
-        if (departmentKeys.size() == departments.size()) return true;
-        else throw new SameDepartmentsFoundException("Same departments found");
+        if (!(departmentKeys.size() == departments.size()))
+            throw new SameDepartmentsFoundException("Same departments found");
     }
 }

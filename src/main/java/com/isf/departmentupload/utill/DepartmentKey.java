@@ -1,5 +1,9 @@
 package com.isf.departmentupload.utill;
 
+import com.isf.departmentupload.parser.XmlCreator;
+import com.isf.departmentupload.parser.XmlParser;
+import com.isf.departmentupload.service.DatabaseSynchronize;
+
 import java.util.Objects;
 
 public class DepartmentKey {
@@ -28,7 +32,8 @@ public class DepartmentKey {
         this.depJob = depJob;
     }
 
-    public DepartmentKey(){}
+    public DepartmentKey() {
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,8 +1,8 @@
-package com.isf.departmentupload.utill;
+package com.isf.departmentupload.service;
 
 import com.isf.departmentupload.parser.XmlParser;
 import com.isf.departmentupload.persistence.model.Department;
-import com.isf.departmentupload.service.DepartmentService;
+import com.isf.departmentupload.utill.DepartmentKey;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -13,8 +13,8 @@ public class DatabaseSynchronize {
     private XmlParser xmlParser = new XmlParser();
     private DepartmentService databaseService = new DepartmentService();
 
-    public void databaseSynchronise(String fileName) {
-        Set<Department> databaseDepartments = databaseService.getDepartments();
+    public void synchronize(String fileName) {
+        List<Department> databaseDepartments = databaseService.getDepartments();
         List<Department> xmlDepartments = xmlParser.parse(fileName);
 
         Map<DepartmentKey, Department> departmentMap = new HashMap<>();
@@ -23,11 +23,11 @@ public class DatabaseSynchronize {
             departmentMap.put(new DepartmentKey(department.getDepCode(), department.getDepJob()), department);
         }
 
-        synchroniseDatabase(departmentMap, databaseDepartments);
-        log.info("Database Synchronize successful");
+        synchronizeDatabase(departmentMap, databaseDepartments);
+        log.info("Database Synchronize successful from - " + fileName + ".xml");
     }
 
-    private void synchroniseDatabase(Map<DepartmentKey, Department> departmentMap, Set<Department> databaseDepartments) {
+    private void synchronizeDatabase(Map<DepartmentKey, Department> departmentMap, List<Department> databaseDepartments) {
         List<Department> departmentsForDelete = new ArrayList<>();
         for (Department dep : databaseDepartments) {
             DepartmentKey departmentKey = new DepartmentKey(dep.getDepCode(), dep.getDepJob());
