@@ -13,7 +13,7 @@ public class UserServiceTest {
     private UserService userService = new UserService();
 
     @Test
-    public void getAllDepartmentsTest() {
+    public void getAllUsersTest() {
         List<User> users = userService.getUsers();
         Assert.assertFalse(users.isEmpty());
     }
